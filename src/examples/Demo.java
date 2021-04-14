@@ -29,7 +29,7 @@ public class Demo {
             	  if(e.getId() == e1.getId() && !e.getOperation().equalsIgnoreCase(e1.getOperation())) {
                   	e1.setOperation(e1.getOperation() +"," + e.getOperation());
                   }
-            	  else {
+            	  else if(e.getId() != e1.getId()) {
             		  int count = 0;
             		  for (int j = 0; j < list2.size(); j++) {
 						Employee emp = list2.get(j);
@@ -38,7 +38,7 @@ public class Demo {
 						}
 					}
             		  if(count==0) {
-            			  list2.add(e);
+            			  
             		  }
             		  
             	  }
