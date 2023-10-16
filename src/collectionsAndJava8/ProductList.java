@@ -59,6 +59,8 @@ public class ProductList {
 		
 		productList.stream().sorted(Comparator.comparing(Product::getpId)).forEach(System.out::println);
 		System.out.println("------------------------------------------------------------------------");
+		productList.stream().sorted(Comparator.comparing(Product::getPrice)).forEach(System.out::println);
+		System.out.println("------------------------------------------------------------------------");
 		productList.stream().filter(p -> p.getPrice() > 3000).forEach(System.out::println);
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("Enter Product Name: ");

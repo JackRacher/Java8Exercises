@@ -44,12 +44,32 @@ public class ArrayToMapProgram {
 			}	
 		}
 		for (Map.Entry<String, Integer> m : listToMap.entrySet()) {
-			System.out.println(m.getKey() + " " + m.getValue());
+			System.out.println(m.getKey() + " ==== " + m.getValue());
 		}
 		
 		//List to map in java8
 		Map<String, Integer> map = list.stream().collect(Collectors.toMap(e->e, (a)->1,Integer::sum));
-		
 		map.entrySet().forEach(System.out::println);
+		
+		
+		//List to Map in Java8 different method
+		Map<String, Long> occurence = list.stream().collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+		occurence.forEach( (k, v) -> System.out.println(k + " : "+ v));
+		
+		// Create a String with repeated keys 
+				Stream<String[]> 
+					str = Stream 
+							.of(new String[][] { { "GFG", "GeeksForGeeks" }, 
+												{ "g", "geeks" }, 
+												{ "GFG", "geeksforgeeks" },{"g","for"},{"g","geeks"} }); 
+
+				// Get Map from String 
+				// using toMap() method 
+				Map<String, String> map1 = str.collect(Collectors.toMap(p -> p[0], p -> p[1], (s, a) -> s + ", " + a)); 
+
+				// Print the Map 
+				System.out.println("Map:" + map1); 
+		
+		
 	}
 }
