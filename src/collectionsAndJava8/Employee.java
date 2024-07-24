@@ -113,7 +113,9 @@ public class Employee {
 		employees.stream().filter(e->e.getEmployee_salary()>(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary)))).forEach(System.out::println);
 		System.out.println("-----------------------Total employees salary greater thatn avg salary and grouping with department wise ------------------------");
 		employees.stream().filter(e->e.getEmployee_salary()>(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary))))
-		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())).forEach((k,v)->System.out.println(k+" : "+v));;
+		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())).forEach((k,v)->System.out.println(k+" : "+v));
+		System.out.println("-----------------------Total employees sum of salaries------------");
+		employees.stream().mapToDouble(Employee::getEmployee_salary).sum();
 		
 	}
 	
