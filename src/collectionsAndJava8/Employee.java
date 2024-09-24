@@ -95,25 +95,33 @@ public class Employee {
 		
 		System.out.println("-----------------------Total Employees--------------------------");
 		employees.stream().forEach(System.out::println);
+		
 		System.out.println("-----------------------Female Employees-------------------------");
 		employees.stream().filter(e->e.getGender().equalsIgnoreCase("female")).forEach(System.out::println);
+		
 		System.out.println("-----------------------Total employees average salary------------");
 		System.out.println(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary)));
+		
 		System.out.println("-----------------------Total employees list avarage, sum, count, min and max details-------------------------");
 		System.out.println(employees.stream().collect(Collectors.summarizingDouble(Employee::getEmployee_salary)).getAverage());
 		System.out.println(employees.stream().collect(Collectors.summarizingDouble(Employee::getEmployee_salary)).getSum());
 		System.out.println(employees.stream().collect(Collectors.summarizingDouble(Employee::getEmployee_salary)).getCount());
 		System.out.println(employees.stream().collect(Collectors.summarizingDouble(Employee::getEmployee_salary)).getMin());
 		System.out.println(employees.stream().collect(Collectors.summarizingDouble(Employee::getEmployee_salary)).getMax());
+		
 		System.out.println("-----------------------Total employees count on gender wise-------------------------");
 		employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())).forEach((k,v)->System.out.println(k+" : "+v));
+		
 		System.out.println("-----------------------Total departments------------------------");
 		employees.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
+		
 		System.out.println("-----------------------Total employees salary greater thatn avg salary ------------------------");
 		employees.stream().filter(e->e.getEmployee_salary()>(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary)))).forEach(System.out::println);
+		
 		System.out.println("-----------------------Total employees salary greater thatn avg salary and grouping with department wise ------------------------");
 		employees.stream().filter(e->e.getEmployee_salary()>(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary))))
 		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())).forEach((k,v)->System.out.println(k+" : "+v));
+		
 		System.out.println("-----------------------Total employees sum of salaries------------");
 		employees.stream().mapToDouble(Employee::getEmployee_salary).sum();
 		
