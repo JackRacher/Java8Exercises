@@ -24,8 +24,11 @@ public class A3Letters {
 		/*stream operation to get sum, count, max, min and average*/
 		System.out.println(names.stream().map(Integer::parseInt).collect(Collectors.summarizingInt(Integer::intValue)).getSum());
 		System.out.println();
-		/*stream operation to get the maximum value from the list*/
-		System.out.println(names.stream().map(Integer::parseInt).filter(i->i>3).max(Integer::compareTo).get());
+		/*stream operation to get the maximum value from the list above 3*/
+		System.out.println(names.stream().map(Integer::parseInt).filter(i->i<3).max(Integer::compareTo).get());
+		System.out.println();
+		/*stream operation to get the maximum value from the list above 3*/
+		System.out.println(names.stream().map(Integer::parseInt).max(Integer::compareTo).get());
 		System.out.println();
 		/*stream operation to get sum, count, max, min and average*/
 		System.out.println(names.stream().map(Integer::parseInt).sorted(Comparator.comparingInt(Integer::intValue).reversed()).findFirst());
