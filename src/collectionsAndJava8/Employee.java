@@ -1,7 +1,10 @@
 package collectionsAndJava8;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Employee {
@@ -92,6 +95,7 @@ public class Employee {
 		employees.add(new Employee(108,"Sruthin",25,"Male","Finance",32000));
 		employees.add(new Employee(109,"Suma",29,"Female","Payroll",39000));
 		employees.add(new Employee(110,"Sri",25,"Female","BDM",27000));
+		employees.add(new Employee(110,"Ram",25,"Male","BDM",27000));
 		
 		System.out.println("-----------------------Total Employees--------------------------");
 		employees.stream().forEach(System.out::println);
@@ -115,6 +119,9 @@ public class Employee {
 		System.out.println("-----------------------Total departments------------------------");
 		employees.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
 		
+		System.out.println("-----------------------List of employees to map key as Employee Name value as Employee object------------------------");
+		employees.stream().collect(Collectors.groupingBy(Employee::getEmployee_name)).forEach((k,v)->System.out.println(k+" : "+v));
+		
 		System.out.println("-----------------------Total employees salary greater thatn avg salary ------------------------");
 		employees.stream().filter(e->e.getEmployee_salary()>(employees.stream().collect(Collectors.averagingDouble(Employee::getEmployee_salary)))).forEach(System.out::println);
 		
@@ -123,9 +130,15 @@ public class Employee {
 		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting())).forEach((k,v)->System.out.println(k+" : "+v));
 		
 		System.out.println("-----------------------Total employees sum of salaries------------");
-		employees.stream().mapToDouble(Employee::getEmployee_salary).sum();
+		Double sumSalariey = employees.stream().mapToDouble(Employee::getEmployee_salary).sum();
+		System.out.println(sumSalariey);
+		
+		System.out.println("-----------------------List of employees with Department and arranged department wise and sorted by names in that particular Department------------");
+		Map<String, Object> grouped = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.collectingAndThen(Collectors.toList(), list->list.stream()
+				.sorted(Comparator.comparing(Employee::getEmployee_name)).collect(Collectors.toList()))));
+		grouped.forEach((k,v)->{
+			System.out.println("Department : "+k+" : Employees : "+v);
+		});
 		
 	}
-	
-
 }
