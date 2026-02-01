@@ -3,14 +3,12 @@ package collectionsAndJava8;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class A3Letters {
 
 	public static void main(String[] args) {
-		String string1 = "madam";
+		//String string1 = "madam";
 		
 		List<String> names = new ArrayList<String>();
 		names.add("1");
