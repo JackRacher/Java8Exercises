@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class Employee {
@@ -138,6 +139,19 @@ public class Employee {
 		grouped.forEach((k,v)->{
 			System.out.println("Department : "+k+" : Employees : "+v);
 		});
-		
+		System.out.println("-----------------------Second higest salary employee------------");
+		employees.stream().map(Employee::getEmployee_salary).distinct().sorted(Comparator.reverseOrder()).skip(2).limit(1)
+						.forEach(System.out::println);
+		System.out.println("-----------------------Employee sort based on salary------------");
+		System.out.println("-----------------------Ascending order------------");
+		employees.stream().sorted(Comparator.comparing(Employee::getEmployee_salary)).collect(Collectors.toList()).forEach(System.out::println);
+		System.out.println("-----------------------Descending order------------");
+		employees.stream().sorted(Comparator.comparing(Employee::getEmployee_salary).reversed()).collect(Collectors.toList()).forEach(System.out::println);
+		System.out.println("-----------------------Employees count based on Gender------------");
+		employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting())).entrySet()
+						.stream().sorted(Comparator.comparing(Entry<String, Long>::getKey).reversed()).forEach(System.out::println);
+		System.out.println("-------------------Employees grouping by Gender------------------");
+		employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.collectingAndThen(Collectors.toList(), list -> list.stream().sorted(Comparator.comparing(Employee::getEmployee_name)).collect(Collectors.toList())))).entrySet()
+						.stream().sorted(Comparator.comparing(Entry<String, List<Employee>>::getKey).reversed()).forEach(System.out::println);
 	}
 }
